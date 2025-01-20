@@ -20,7 +20,7 @@ openpyxl==3.1.5
 elasticsearch==7.17.0
 elasticsearch_dsl==7.4.0
 requests==2.32.3
-python-dotenv==0.21.0
+python-dotenv==1.0.1
 swifter==1.4.0
 tweepy==4.8.0
 pytest==7.2.1
