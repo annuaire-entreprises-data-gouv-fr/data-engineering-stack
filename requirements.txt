@@ -1,6 +1,6 @@
 GitPython
 table-schema-to-markdown==0.4.12
-frictionless==5.18.0
+frictionless==5.18.1
 jsonschema
 Unidecode==1.3.6
 PyYAML
