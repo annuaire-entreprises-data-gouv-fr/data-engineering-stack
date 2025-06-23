@@ -2,7 +2,7 @@ GitPython
 table-schema-to-markdown==0.4.13
 frictionless==5.18.1
 jsonschema
-Unidecode==1.3.6
+Unidecode==1.4.0
 PyYAML
 geojson
 shapely
