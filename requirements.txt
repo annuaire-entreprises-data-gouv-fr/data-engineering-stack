@@ -22,7 +22,7 @@ elasticsearch_dsl==7.4.0
 requests==2.32.4
 python-dotenv==0.21.0
 swifter==1.4.0
-tweepy==4.8.0
+tweepy==4.16.0
 pytest==8.4.1
 langdetect==1.0.9
 pydantic==2.11.7
