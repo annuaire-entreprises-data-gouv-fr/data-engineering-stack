@@ -6,7 +6,7 @@ Unidecode==1.4.0
 PyYAML
 geojson
 shapely
-minio==7.2.15
+minio==7.2.16
 boto3==1.40.1
 emails==0.6
 pandas==2.3.1
