@@ -7,7 +7,7 @@ PyYAML
 geojson
 shapely
 minio==7.2.16
-boto3==1.40.6
+boto3==1.40.11
 emails==0.6
 pandas==2.3.1
 papermill==2.6.0
