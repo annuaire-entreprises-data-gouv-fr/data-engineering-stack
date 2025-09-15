@@ -29,4 +29,4 @@ pydantic==2.11.7
 pyproj==3.7.0
 psycopg2-binary==2.9.10
 redis==6.4.0
-sentry-sdk==2.35.0
+sentry-sdk==2.37.1
