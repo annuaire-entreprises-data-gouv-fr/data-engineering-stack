@@ -7,14 +7,14 @@ PyYAML
 geojson
 shapely
 minio==7.2.18
-boto3==1.40.40
+boto3==1.40.50
 emails==0.6
-pandas==2.3.2
+pandas==2.3.3
 papermill==2.6.0
 plotly==6.3.1
 plotly_express==0.4.1
-kaleido==1.0.0
 ipykernel==7.0.0
+kaleido==1.1.0
 nbconvert==7.16.6
 openpyxl==3.1.5
 elasticsearch==7.17.0
@@ -27,6 +27,6 @@ pytest==8.4.2
 langdetect==1.0.9
 pydantic==2.11.7
 pyproj==3.7.2
-psycopg2-binary==2.9.10
+psycopg2-binary==2.9.11
 redis==6.4.0
-sentry-sdk==2.39.0
+sentry-sdk==2.41.0
