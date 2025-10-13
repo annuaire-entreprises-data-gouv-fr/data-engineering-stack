@@ -27,6 +27,6 @@ pytest==8.4.2
 langdetect==1.0.9
 pydantic==2.11.7
 pyproj==3.7.2
-psycopg2-binary==2.9.10
+psycopg2-binary==2.9.11
 redis==6.4.0
 sentry-sdk==2.39.0
