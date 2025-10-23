@@ -35,33 +35,34 @@ docker-compose up --build -d
 
 ### Check all indices:
 ```bash
-curl -u elastic:elastic http://localhost:9200/_cat/indices?v
+curl -u http://localhost:9200/_cat/indices?v
 ```
 
 ### Check cluster status:
 ```bash
-curl -u elastic:elastic http://localhost:9200/_cluster/health?pretty
+curl -u http://localhost:9200/_cluster/health?pretty
 ```
 
 ### Delete an index:
 ```bash
-curl -u elastic:elastic -X DELETE http://localhost:9200/your-index-name
+curl -u -X DELETE http://localhost:9200/your-index-name
 ```
 
 ### View index mapping:
 ```bash
-curl -u elastic:elastic http://localhost:9200/your-index-name/_mapping?pretty
+curl -u http://localhost:9200/your-index-name/_mapping?pretty
 ```
 
 ### Check aliases:
 ```bash
-curl -u elastic:elastic http://localhost:9200/_cat/aliases?v
+curl -u http://localhost:9200/_cat/aliases?v
 ```
 
 ### Search all documents in an index:
 ```bash
-curl -u elastic:elastic http://localhost:9200/your-index-name/_search?pretty
+curl -u http://localhost:9200/your-index-name/_search?pretty
 ```
+
 ## Connections
 
 Connections can be created manually or with python scripts `createConn.py` (using Airflow API) inside each projects. You need also to add your ssh key inside `ssh` folder of repository for the container to be able to see it in `/home/airflow/.ssh/` folder of container.
