@@ -13,9 +13,9 @@ cd data-engineering-stack
 # Create directories necessary for Airflow to work
 ./1_prepareDirs.sh
 
-# Prepare .env file 
+# Prepare .env file
 ./2_prepare_env.sh
-nano .env 
+nano .env
 # Edit POSTGRES_USER ; POSTGRES_PASSWORD ; POSTGRES_DB ; AIRFLOW_ADMIN_MAIL ; AIRFLOW_ADMIN_FIRSTNAME ; AIRFLOW_ADMIN_NAME ; AIRFLOW_ADMIN_PASSWORD
 
 # Launch services
@@ -29,6 +29,38 @@ docker-compose up --build -d
 ```
 # Airflow used to have a little time before dag refreshing when dag is created. You can force refreshing with :
 ./refreshBagDags.sh
+```
+
+## Useful Elasticsearch Commands
+
+### Check all indices:
+```bash
+curl -u http://localhost:9200/_cat/indices?v
+```
+
+### Check cluster status:
+```bash
+curl -u http://localhost:9200/_cluster/health?pretty
+```
+
+### Delete an index:
+```bash
+curl -u -X DELETE http://localhost:9200/your-index-name
+```
+
+### View index mapping:
+```bash
+curl -u http://localhost:9200/your-index-name/_mapping?pretty
+```
+
+### Check aliases:
+```bash
+curl -u http://localhost:9200/_cat/aliases?v
+```
+
+### Search all documents in an index:
+```bash
+curl -u http://localhost:9200/your-index-name/_search?pretty
 ```
 
 ## Connections

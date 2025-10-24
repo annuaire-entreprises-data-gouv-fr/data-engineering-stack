@@ -1,6 +1,7 @@
 services:
   postgres:
     image: postgres:12
+    container_name: "postgres-${AIRFLOW_ENV_TYPE}-${AIRFLOW_ENV_NAME}"
     user: root
     volumes:
       - ./pg-airflow:/var/lib/postgresql/data
@@ -9,18 +10,22 @@ services:
       - .env
     ports:
       - "127.0.0.1:${AIRFLOW_POSTGRES_PORT}:5432"
-    container_name: "airflow-db-${AIRFLOW_ENV_TYPE}-${AIRFLOW_ENV_NAME}"
+    networks:
+      - annuaire-network
+
   webserver:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.airflow
       args:
           - USER_EMAIL=$USER_EMAIL
           - USER_NAME=$USER_NAME
+    container_name: "airflow-${AIRFLOW_ENV_TYPE}-${AIRFLOW_ENV_NAME}"
     hostname: webserver
     restart: unless-stopped
     depends_on:
       - postgres
+      - elasticsearch
     command: webserver
     env_file:
       - .env
@@ -40,4 +45,43 @@ services:
       interval: 30s
       timeout: 30s
       retries: 32
-    container_name: "airflow-${AIRFLOW_ENV_TYPE}-${AIRFLOW_ENV_NAME}"
+    networks:
+      - annuaire-network
+
+  elasticsearch:
+    build:
+      context: .
+      dockerfile: Dockerfile.elasticsearch
+    container_name: "elasticsearch-${AIRFLOW_ENV_TYPE}-${AIRFLOW_ENV_NAME}"
+    environment:
+      - discovery.type=single-node
+      - cluster.name=annuaire-search-cluster
+      - node.name=annuaire-es-node-1
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - xpack.security.enabled=true
+      - ELASTIC_PASSWORD=${ELASTIC_PASSWORD:-elastic}
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 65536
+        hard: 65536
+    volumes:
+      - ${LOCAL_TMP_PATH}/elasticsearch:/usr/share/elasticsearch/data
+    ports:
+      - "${ELASTIC_PORT:-9200}:9200"
+      - "9300:9300"
+    healthcheck:
+      test: ["CMD-SHELL", "curl -u elastic:${ELASTIC_PASSWORD:-elastic} -f http://localhost:9200/_cluster/health || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
+    networks:
+      - annuaire-network
+
+networks:
+  annuaire-network:
+    driver: bridge
