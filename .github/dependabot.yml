@@ -5,5 +5,9 @@ version: 2
 updates:
   - package-ecosystem: "pip" # Specifies the Python package ecosystem
     directory: "/" # Root directory where requirements.txt is located
+    cooldown:
+      semver-major-days: 5
+      semver-minor-days: 3
+      semver-patch-days: 0
     schedule:
       interval: "weekly" # The update schedule (e.g., daily, weekly, monthly)
