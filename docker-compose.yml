@@ -30,7 +30,7 @@ services:
     env_file:
       - .env
     volumes:
-      - ${LOCAL_AIRFLOW_DAG_PATH}:/opt/airflow/dags/dag_datalake_sirene/
+      - ${LOCAL_AIRFLOW_DAG_PATH}:/opt/airflow/dags/data_pipelines_annuaire/
       - ${LOCAL_TMP_PATH}:/tmp
       - ./scripts:/opt/airflow/scripts
       - ./logs:/opt/airflow/logs
