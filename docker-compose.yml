@@ -1,7 +1,6 @@
 services:
   postgres:
     image: postgres:12
-    container_name: "postgres-${AIRFLOW_ENV_TYPE}-${AIRFLOW_ENV_NAME}"
     user: root
     volumes:
       - ${LOCAL_TMP_PATH}/pg-airflow:/var/lib/postgresql/data
@@ -10,11 +9,14 @@ services:
       - .env
     ports:
       - "127.0.0.1:${AIRFLOW_POSTGRES_PORT}:5432"
+    networks:
+      - annuaire-network
     container_name: "airflow-db-${DOCKER_CONTEXT}-${DOCKER_ENV}"
+
   webserver:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.airflow
     hostname: webserver
     restart: unless-stopped
     depends_on:
@@ -22,7 +24,7 @@ services:
     env_file:
       - .env
     volumes:
-      - ${LOCAL_AIRFLOW_DAG_PATH}:${AIRFLOW_VAR_AIRFLOW_DAG_HOME}/dag_datalake_sirene
+      - ${LOCAL_AIRFLOW_DAG_PATH}:${AIRFLOW_VAR_AIRFLOW_DAG_HOME}/data_pipelines_annuaire
       - ${LOCAL_TMP_PATH}/tmp:${AIRFLOW_VAR_AIRFLOW_DAG_TMP}
       - ${LOCAL_TMP_PATH}/logs:/opt/airflow/logs
       - ${LOCAL_TMP_PATH}/scripts:/opt/airflow/scripts:ro
@@ -37,15 +39,14 @@ services:
       interval: 30s
       timeout: 30s
       retries: 32
-<<<<<<< HEAD
     networks:
       - annuaire-network
+    container_name: "airflow-${DOCKER_CONTEXT}-${DOCKER_ENV}"
 
   elasticsearch:
     build:
       context: .
       dockerfile: Dockerfile.elasticsearch
-    container_name: "elasticsearch-${AIRFLOW_ENV_TYPE}-${AIRFLOW_ENV_NAME}"
     environment:
       - discovery.type=single-node
       - cluster.name=annuaire-search-cluster
@@ -74,10 +75,8 @@ services:
       start_period: 60s
     networks:
       - annuaire-network
+    container_name: "elasticsearch-${DOCKER_CONTEXT}-${DOCKER_ENV}"
 
 networks:
   annuaire-network:
     driver: bridge
-=======
-    container_name: "airflow-${DOCKER_CONTEXT}-${DOCKER_ENV}"
->>>>>>> 51ece1a (build{airflow3): upgrade local Docker files to airflow3)

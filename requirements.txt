@@ -10,3 +10,4 @@ pyproj==3.7.2
 psycopg2-binary==2.9.11
 redis==7.1.0
 sentry-sdk==2.43.0
+asyncpg==0.30.0
