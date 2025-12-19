@@ -20,7 +20,8 @@ services:
     hostname: webserver
     restart: unless-stopped
     depends_on:
-      - postgres
+      postgres:
+        condition: service_healthy
     env_file:
       - .env
     volumes:
