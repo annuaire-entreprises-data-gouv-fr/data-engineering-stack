@@ -1,3 +1,11 @@
+
+
+⚠️ **Ce dépôt n'est plus maintenu et sera archivé prochainement**
+
+Toutes les ressources ont été déplacées vers : https://github.com/annuaire-entreprises-data-gouv-fr/search-infra
+
+---
+
 # Airflow pour l'Annuaire des Entreprises
 
 Ce repository a pour objectif de mettre en place rapidement une infrastructure Airflow permettant à chacun de tester son DAG avant mise en production.
